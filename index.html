@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visualization Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container inner">
+    <div class="logo">
+      <span class="logo-hex">⬡</span>
+      Visualization Portfolio
+      <span class="logo-sub">— interactive data exploration</span>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <div class="projects-grid">
+
+    <!-- Visual RAG -->
+    <a href="projects/visual-rag/" class="project-card active">
+      <div class="card-thumb">
+        <div class="card-thumb-placeholder">
+          <span class="card-thumb-icon">⬡</span>
+          <span style="font-size:11px;">Embedding Space Explorer</span>
+        </div>
+        <!-- Replace with: <img src="assets/img/visual-rag-thumb.png" alt="Visual RAG" style="width:100%;height:100%;object-fit:cover;"> -->
+      </div>
+      <div class="card-body">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <span class="badge badge-blue">RAG</span>
+          <span class="badge badge-blue">Embeddings</span>
+          <span class="badge">NLP</span>
+        </div>
+        <div class="card-title">Visual RAG</div>
+        <div class="card-desc">Interactive retrieval-augmented generation with a live 2D embedding space explorer. Watch your query land on the semantic map and trace how answers emerge.</div>
+        <div class="card-footer">
+          <span class="card-link">View Project <span>→</span></span>
+          <span class="badge badge-green">Live</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- VIBE Research Assistant -->
+    <div class="project-card">
+      <div class="card-thumb">
+        <div class="card-thumb-placeholder">
+          <span class="card-thumb-icon">🔬</span>
+          <span style="font-size:11px;">Coming Soon</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <span class="badge">Research</span>
+          <span class="badge">NLP</span>
+        </div>
+        <div class="card-title">VIBE Research Assistant</div>
+        <div class="card-desc">An intelligent research assistant that visualizes relationships between papers, concepts, and evidence — helping researchers navigate complex knowledge spaces.</div>
+        <div class="card-footer">
+          <span class="card-coming-soon">Coming soon</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Visual Dialog -->
+    <a href="projects/watson-concept-graph/" class="project-card active">
+      <div class="card-thumb">
+        <div class="card-thumb-placeholder">
+          <span class="card-thumb-icon">🕸</span>
+          <span style="font-size:11px;">Concept Map + LLM Quiz</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <span class="badge badge-blue">LLM</span>
+          <span class="badge">Knowledge Graph</span>
+          <span class="badge">D3.js</span>
+        </div>
+        <div class="card-title">Visual Dialog</div>
+        <div class="card-desc">An LLM quiz bot wired to a D3.js concept map — as the bot discusses memory psychology, it highlights the relevant nodes in the graph in real time.</div>
+        <div class="card-footer">
+          <span class="card-link">View Project <span>→</span></span>
+          <span class="badge badge-green">Live</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    Built with plain HTML · Jae-wook Ahn
+  </div>
+</footer>
+
+</body>
+</html>

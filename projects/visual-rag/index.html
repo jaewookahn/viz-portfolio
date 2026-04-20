@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visual RAG — Visualization Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+  <style>
+    body { font-size: 15px; }
+
+    .project-hero { padding: 64px 0 48px; border-bottom: 1px solid var(--border); }
+    .back-link { margin-bottom: 40px; }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 16px;
+    }
+    .hero-title {
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero-title em { font-style: normal; color: var(--blue); }
+    .hero-lede {
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--muted);
+      max-width: 560px;
+    }
+    .hero-lede strong { color: var(--text); font-weight: 500; }
+
+    /* Two-column editorial layout */
+    .editorial {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0 48px;
+      align-items: start;
+    }
+    @media (max-width: 680px) {
+      .editorial { grid-template-columns: 1fr; }
+    }
+    .editorial-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      padding-top: 4px;
+      position: sticky;
+      top: 24px;
+    }
+    .editorial-body {}
+    .editorial-body h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+    .editorial-body p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 600px;
+      margin-bottom: 12px;
+    }
+    .editorial-body p:last-child { margin-bottom: 0; }
+    .editorial-body strong { color: var(--text); font-weight: 500; }
+
+    .section { padding: 52px 0; border-bottom: 1px solid var(--border); }
+    .section:last-child { border-bottom: none; }
+
+    /* Pipeline — inline flow, no cards */
+    .pipeline {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 24px;
+    }
+    .pipeline-node {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--text);
+      background: var(--bg-card);
+    }
+    .pipeline-node.active {
+      border-color: rgba(96,165,250,0.4);
+      color: var(--blue);
+    }
+    .pipeline-sep {
+      color: var(--border-hover);
+      font-size: 13px;
+    }
+
+    /* Metric pair — 2-col inside editorial body */
+    .metric-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 20px;
+    }
+    @media (max-width: 500px) { .metric-pair { grid-template-columns: 1fr; } }
+    .metric-item {
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+    }
+    .metric-name {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 4px;
+    }
+    .metric-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .metric-formula {
+      font-family: 'SF Mono', monospace;
+      font-size: 10px;
+      color: rgba(74,222,128,0.7);
+      margin-top: 4px;
+    }
+
+    /* Screenshot */
+    .screenshot-block { margin-top: 24px; }
+    .screenshot-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #111827;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #374151;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+    .screenshot-caption {
+      font-size: 12px;
+      color: var(--muted);
+      opacity: 0.7;
+    }
+
+    /* Video */
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #0a0d14;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+    .video-placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+      color: #374151;
+    }
+    .video-play {
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 1px solid #1f2937;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; color: #4b5563;
+    }
+
+    .site-footer { border-top: 1px solid var(--border); padding: 24px 0; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container inner">
+    <a href="../../" class="logo">
+      <span class="logo-hex">⬡</span>
+      Visualization Portfolio
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <!-- Hero -->
+  <div class="project-hero">
+    <div class="container">
+      <a href="../../" class="back-link">
+        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Back
+      </a>
+      <div class="hero-eyebrow">Interactive Research Tool</div>
+      <h1 class="hero-title">Visual<br><em>RAG</em></h1>
+      <p class="hero-lede">
+        Retrieval-Augmented Generation as a navigable space. A million documents collapse into a terrain — queries land on it, answers grow from it, and every step of reasoning leaves a visible trace.
+      </p>
+    </div>
+  </div>
+
+  <!-- Demo -->
+  <div class="section">
+    <div class="container">
+      <div class="video-wrapper">
+        <!-- <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe> -->
+        <div class="video-placeholder">
+          <div class="video-play">▶</div>
+          <span style="font-size:12px;">Demo video coming soon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pipeline -->
+  <div class="section">
+    <div class="container">
+      <div class="editorial">
+        <div class="editorial-label">Pipeline</div>
+        <div class="editorial-body">
+          <h2>The full pipeline, streamed</h2>
+          <p>Each stage emits a server-sent event. The map doesn't wait — the query position appears before the search resolves, documents land as results arrive, and the generated answer plots itself once streaming ends. <strong>Nothing is buffered until it's complete.</strong></p>
+          <div class="pipeline" style="margin-top:20px;">
+            <span class="pipeline-node active">Embed</span>
+            <span class="pipeline-sep">→</span>
+            <span class="pipeline-node active">Project</span>
+            <span class="pipeline-sep">→</span>
+            <span class="pipeline-node">Search</span>
+            <span class="pipeline-sep">→</span>
+            <span class="pipeline-node">Render</span>
+            <span class="pipeline-sep">→</span>
+            <span class="pipeline-node">Generate</span>
+            <span class="pipeline-sep">→</span>
+            <span class="pipeline-node active">Plot answer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cluster Visualization -->
+  <div class="section">
+    <div class="container">
+      <div class="editorial">
+        <div class="editorial-label">Cluster Space</div>
+        <div class="editorial-body">
+          <h2>A corpus as terrain</h2>
+          <p>100 semantic clusters from Faiss K-means over 1M documents are rendered as a continuous topographic surface using a <strong>centroid-weighted Mixture of Gaussians</strong> — not a point-cloud KDE. Density peaks align exactly with cluster centers; the colorscale reads like elevation. Retrieved documents scatter on it, sized and colored by cosine similarity.</p>
+          <p>New query points are placed via nearest-centroid approximation rather than running UMAP at query time — <strong>deterministic, sub-millisecond, no async process conflicts.</strong></p>
+
+          <div class="screenshot-block">
+            <div class="screenshot-placeholder">
+              <img src="../../assets/img/rag-map.png" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+              <!-- Screenshot — embedding terrain with retrieved documents -->
+            </div>
+            <div class="screenshot-caption">Retrieved documents scatter across the terrain. Cluster labels float above each peak.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topology -->
+  <div class="section">
+    <div class="container">
+      <div class="editorial">
+        <div class="editorial-label">Topology Analysis</div>
+        <div class="editorial-body">
+          <h2>What the map says about a document</h2>
+          <p>Select any retrieved document and four metrics — computed in-browser from 2D cluster geometry — surface structural signals about <strong>why it was retrieved and how much to trust it.</strong></p>
+
+          <div class="metric-pair">
+            <div class="metric-item">
+              <div class="metric-name">Centrality</div>
+              <div class="metric-desc">How close to the heart of its cluster. High = prototypical; low = edge case.</div>
+              <div class="metric-formula">dist(doc→centroid) / cluster_radius</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-name">Boundary Ratio</div>
+              <div class="metric-desc">Ratio of distance to 2nd vs 1st nearest centroid. Near 1.0 = document straddles two topics.</div>
+              <div class="metric-formula">dist(doc→2nd) / dist(doc→1st)</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-name">Local Density</div>
+              <div class="metric-desc">Lookup into the 150×150 MoG grid, normalized to peak. Low = niche or underrepresented topic.</div>
+              <div class="metric-formula">heatmap[pt] / max(heatmap)</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-name">Adjacent Cluster</div>
+              <div class="metric-desc">Name of the second-nearest centroid — identifies which other topic a boundary document is straddling.</div>
+            </div>
+          </div>
+
+          <div class="screenshot-block">
+            <div class="screenshot-placeholder">
+              <img src="../../assets/img/rag-topology.png" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+              <!-- Screenshot — topology panel for a selected document -->
+            </div>
+            <div class="screenshot-caption">Topology panel open for a boundary document — boundary ratio near 1.0, adjacent cluster visible.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Generation -->
+  <div class="section">
+    <div class="container">
+      <div class="editorial">
+        <div class="editorial-label">Directed Generation</div>
+        <div class="editorial-body">
+          <h2>Pick a source, watch the answer move</h2>
+          <p>Click any document on the map and regenerate. The LLM reruns on that source alone — bypassing the vector search entirely. Each answer is re-embedded after streaming and plotted as a green diamond. Multiple answers per session connect as a dashed path: <strong>the LLM's semantic drift made visible.</strong></p>
+
+          <div class="screenshot-block">
+            <div class="screenshot-placeholder">
+              <img src="../../assets/img/rag-answers.png" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+              <!-- Screenshot — answer path across the map -->
+            </div>
+            <div class="screenshot-caption">Three answers from three source documents — connected by a dashed path showing semantic drift.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- History -->
+  <div class="section">
+    <div class="container">
+      <div class="editorial">
+        <div class="editorial-label">Session History</div>
+        <div class="editorial-body">
+          <h2>Every session, restorable</h2>
+          <p>Queries, retrieved documents, and all generated answers persist to localStorage. Restoring a past session reloads the full map state — answer markers, document positions, selected answer — exactly as left.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;">
+    <a href="../../" class="back-link" style="margin-bottom:0;">
+      <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+      Back to Portfolio
+    </a>
+    <span style="font-size:12px;color:var(--muted);">Jae-wook Ahn</span>
+  </div>
+</footer>
+
+</body>
+</html>

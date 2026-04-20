@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visual Dialog — Visualization Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+  <style>
+    body { font-size: 15px; }
+
+    .project-hero { padding: 64px 0 48px; border-bottom: 1px solid var(--border); }
+    .back-link { margin-bottom: 40px; }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 16px;
+    }
+    .hero-title {
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero-title em { font-style: normal; color: var(--blue); }
+    .hero-lede {
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--muted);
+      max-width: 560px;
+    }
+    .hero-lede strong { color: var(--text); font-weight: 500; }
+
+    .editorial {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0 48px;
+      align-items: start;
+    }
+    @media (max-width: 680px) { .editorial { grid-template-columns: 1fr; } }
+    .editorial-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      padding-top: 4px;
+      position: sticky;
+      top: 24px;
+    }
+    .editorial-body h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+    .editorial-body p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 600px;
+      margin-bottom: 12px;
+    }
+    .editorial-body p:last-child { margin-bottom: 0; }
+    .editorial-body strong { color: var(--text); font-weight: 500; }
+
+    .section { padding: 52px 0; border-bottom: 1px solid var(--border); }
+    .section:last-child { border-bottom: none; }
+
+    .screenshot-block { margin-top: 24px; }
+    .screenshot-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #111827;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #374151;
+      font-size: 12px;
+      margin-bottom: 8px;
+      overflow: hidden;
+      position: relative;
+    }
+    .screenshot-caption {
+      font-size: 12px;
+      color: var(--muted);
+      opacity: 0.7;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #0a0d14;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+    .video-placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+      color: #374151;
+    }
+    .video-play {
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 1px solid #1f2937;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; color: #4b5563;
+    }
+
+    /* Concept graph mock */
+    .graph-mock {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 28px;
+      position: relative;
+    }
+    .concept-node {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 11px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--muted);
+      background: var(--bg-card);
+      white-space: nowrap;
+    }
+    .concept-node.blue  { border-color: rgba(96,165,250,0.4);  color: var(--blue); }
+    .concept-node.green { border-color: rgba(74,222,128,0.4);  color: var(--green); }
+    .concept-node.purple{ border-color: rgba(167,139,250,0.4); color: #a78bfa; }
+    .concept-node.amber { border-color: rgba(251,191,36,0.4);  color: #fbbf24; }
+    .concept-node.lit   {
+      border-color: rgba(239,68,68,0.7);
+      color: #f87171;
+      box-shadow: 0 0 8px rgba(239,68,68,0.25);
+    }
+
+    /* Progress ring mock */
+    .progress-mock {
+      margin-top: 24px;
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .ring-wrap {
+      flex-shrink: 0;
+      position: relative;
+      width: 80px;
+      height: 80px;
+    }
+    .ring-wrap svg { width: 80px; height: 80px; }
+    .ring-track { fill: none; stroke: var(--border); stroke-width: 6; }
+    .ring-fill  { fill: none; stroke: var(--green); stroke-width: 6;
+                  stroke-linecap: round; stroke-dasharray: 188;
+                  stroke-dashoffset: 56; transform: rotate(-90deg); transform-origin: center; }
+    .ring-label {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; color: var(--green);
+    }
+    .ring-nodes {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+    .ring-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+    }
+    .ring-bar-bg {
+      flex: 1;
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .ring-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: var(--green);
+    }
+    .ring-bar-name { color: var(--muted); width: 120px; flex-shrink: 0; }
+    .ring-bar-pct  { color: var(--muted); width: 30px; text-align: right; flex-shrink: 0; font-size: 11px; }
+
+    /* Chat mock */
+    .chat-mock {
+      margin-top: 24px;
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      font-size: 12px;
+      line-height: 1.65;
+    }
+    .chat-msg { margin-bottom: 12px; }
+    .chat-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+    .chat-label.bot  { color: var(--blue); }
+    .chat-label.user { color: var(--muted); }
+    .chat-text  { color: var(--muted); }
+    .chat-text strong { color: var(--text); font-weight: 500; }
+    .chat-options { display: flex; flex-direction: column; gap: 5px; margin-top: 8px; }
+    .chat-option {
+      display: inline-block;
+      padding: 4px 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--blue);
+      font-size: 11px;
+      width: fit-content;
+    }
+    .chat-option.chosen {
+      background: rgba(96,165,250,0.08);
+      border-color: rgba(96,165,250,0.4);
+    }
+    .chat-msg-user .chat-text { color: var(--text); opacity: 0.65; }
+
+    .site-footer { border-top: 1px solid var(--border); padding: 24px 0; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container inner">
+    <a href="../../" class="logo">
+      <span class="logo-hex">⬡</span>
+      Visualization Portfolio
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <!-- Hero -->
+  <div class="project-hero">
+    <div class="container">
+      <a href="../../" class="back-link">
+        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Back
+      </a>
+      <div class="hero-eyebrow">Interactive Learning Tool</div>
+      <h1 class="hero-title">Visual<br><em>Dialog</em></h1>
+      <p class="hero-lede">
+        A concept map that responds to conversation. An LLM conducts a Socratic dialogue with the student — and as each concept enters the discussion, the map <strong>lights up, connects, and tracks progress</strong> in real time.
+      </p>
+    </div>
+  </div>
+
+  <!-- Demo -->
+  <div class="section">
+    <div class="container">
+      <div class="video-wrapper">
+        <!-- <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe> -->
+        <div class="video-placeholder">
+          <div class="video-play">▶</div>
+          <span style="font-size:12px;">Demo video coming soon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Concept -->
+  <div class="section">
+    <div class="container">
+      <div class="editorial">
+        <div class="editorial-label">Concept</div>
+        <div class="editorial-body">
+          <h2>The map listens to the lesson</h2>
+          <p>Visual Dialog fuses conversation and knowledge structure: the <strong>concept map is the live state of the dialogue</strong>. When the bot corrects a mistake, the right node lights up as a hint. The student always knows where they are in the knowledge space. The backend supports both local and cloud LLMs interchangeably.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Knowledge Graph -->
+  <div class="section">
+    <div class="container">
+      <div class="editorial">
+        <div class="editorial-label">Knowledge Graph</div>
+        <div class="editorial-body">
+          <h2>Memory as a force-directed network</h2>
+          <p>The curriculum is a graph — nodes for concepts, edges for relationships. Connected ideas cluster naturally, and the structure itself becomes part of the lesson. Students can see which concepts are central, which are peripheral, and how a misunderstood idea connects to ones they already know.</p>
+          <p>When the LLM references a concept, <strong>that node's border turns red</strong>. Wrong answer? The correct concept lights up before the student re-reads the explanation — a hint grounded in the domain's own structure.</p>
+
+          <div class="screenshot-block">
+            <div class="graph-mock">
+              <span class="concept-node blue">short-term memory</span>
+              <span class="concept-node blue lit">chunking</span>
+              <span class="concept-node blue">capacity</span>
+              <span class="concept-node blue">duration</span>
+              <span class="concept-node green">long-term memory</span>
+              <span class="concept-node green lit">explicit memory</span>
+              <span class="concept-node green">declarative memory</span>
+              <span class="concept-node green">anterograde amnesia</span>
+              <span class="concept-node amber">non-declarative memory</span>
+              <span class="concept-node amber">procedural memory</span>
+              <span class="concept-node purple">iconic memory</span>
+              <span class="concept-node purple">sensory memory</span>
+              <span class="concept-node blue">memory</span>
+            </div>
+            <div class="screenshot-caption">Nodes lit in red — <em>chunking</em> and <em>explicit memory</em> — are actively referenced in the current dialogue turn.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Progress -->
+  <div class="section">
+    <div class="container">
+      <div class="editorial">
+        <div class="editorial-label">Progress</div>
+        <div class="editorial-body">
+          <h2>Mastery visible at a glance</h2>
+          <p>Overall progress renders as a <strong>ring overlay on the concept map</strong>, with per-cluster breakdowns below. Updated after each question — the student always knows how far they've come without leaving the visualization.</p>
+
+          <div class="screenshot-block">
+            <div class="screenshot-placeholder">Screenshot coming soon</div>
+            <div class="screenshot-caption">Progress ring overlay — overall completion and per-topic breakdown.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dialog -->
+  <div class="section">
+    <div class="container">
+      <div class="editorial">
+        <div class="editorial-label">Dialog</div>
+        <div class="editorial-body">
+          <h2>Self-directed, conversational, multi-domain</h2>
+          <p>Any subject with a graph-representable structure — psychology, biology, history, mathematics — can be loaded as a curriculum. The LLM adapts difficulty to the student's answers. Choices arrive as <strong>clickable buttons</strong>, not a text box — keeping the interaction fluid.</p>
+
+          <div class="chat-mock">
+            <div class="chat-msg">
+              <div class="chat-label bot">Quiz Bot</div>
+              <div class="chat-text">What is the term for organizing information into meaningful groups to expand short-term memory capacity?</div>
+              <div class="chat-options">
+                <span class="chat-option">A) Encoding</span>
+                <span class="chat-option chosen">B) Chunking</span>
+                <span class="chat-option">C) Rehearsal</span>
+                <span class="chat-option">D) Priming</span>
+              </div>
+            </div>
+            <div class="chat-msg chat-msg-user">
+              <div class="chat-label user">Student</div>
+              <div class="chat-text">B) Chunking</div>
+            </div>
+            <div class="chat-msg">
+              <div class="chat-label bot">Quiz Bot</div>
+              <div class="chat-text"><strong>Correct.</strong> Chunking groups individual items into larger meaningful units, dramatically increasing what short-term memory can hold. Ready for the next concept?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;">
+    <a href="../../" class="back-link" style="margin-bottom:0;">
+      <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+      Back to Portfolio
+    </a>
+    <span style="font-size:12px;color:var(--muted);">Jae-wook Ahn</span>
+  </div>
+</footer>
+
+</body>
+</html>
