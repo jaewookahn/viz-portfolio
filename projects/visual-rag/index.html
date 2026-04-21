@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Visual RAG — Visualization Portfolio</title>
+  <title>Visual RAG — Visual Symbiosis</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -154,7 +154,7 @@
     }
     .screenshot-caption {
       font-size: 12px;
-      color: var(--muted);
+      color: lightgrey;
       opacity: 0.7;
     }
 
@@ -191,7 +191,7 @@
   <div class="container inner">
     <a href="../../" class="logo">
       <span class="logo-hex">⬡</span>
-      Visualization Portfolio
+      Visual Symbiosis
     </a>
   </div>
 </header>
@@ -231,7 +231,8 @@
         <div class="editorial-label">Pipeline</div>
         <div class="editorial-body">
           <h2>The full pipeline, streamed</h2>
-          <p>Each stage emits a server-sent event. The map doesn't wait — the query position appears before the search resolves, documents land as results arrive, and the generated answer plots itself once streaming ends. <strong>Nothing is buffered until it's complete.</strong></p>
+          <p>Each stage emits a server-sent event. The map doesn't wait — the query position appears before the search resolves, documents land as results arrive, and the generated answer plots itself once streaming ends. </p>
+            <!-- <strong>Nothing is buffered until it's complete.</strong> -->
           <div class="pipeline" style="margin-top:20px;">
             <span class="pipeline-node active">Embed</span>
             <span class="pipeline-sep">→</span>
@@ -257,8 +258,9 @@
         <div class="editorial-label">Cluster Space</div>
         <div class="editorial-body">
           <h2>A corpus as terrain</h2>
-          <p>100 semantic clusters from Faiss K-means over 1M documents are rendered as a continuous topographic surface using a <strong>centroid-weighted Mixture of Gaussians</strong> — not a point-cloud KDE. Density peaks align exactly with cluster centers; the colorscale reads like elevation. Retrieved documents scatter on it, sized and colored by cosine similarity.</p>
-          <p>New query points are placed via nearest-centroid approximation rather than running UMAP at query time — <strong>deterministic, sub-millisecond, no async process conflicts.</strong></p>
+          <p>100 semantic clusters from Faiss K-means over 1M documents are rendered as a continuous topographic surface using a <strong>centroid-weighted Mixture of Gaussians</strong>. Density peaks align exactly with cluster centers; the colorscale reads like elevation. Retrieved documents scatter on it, sized and colored by cosine similarity.</p>
+          <p>New query points are placed via nearest-centroid approximation rather than running UMAP at query time.</p>
+           <!-- — <strong>deterministic, sub-millisecond, no async process conflicts.</strong>-->
 
           <div class="screenshot-block">
             <div class="screenshot-placeholder">
@@ -319,8 +321,8 @@
         <div class="editorial-label">Directed Generation</div>
         <div class="editorial-body">
           <h2>Pick a source, watch the answer move</h2>
-          <p>Click any document on the map and regenerate. The LLM reruns on that source alone — bypassing the vector search entirely. Each answer is re-embedded after streaming and plotted as a green diamond. Multiple answers per session connect as a dashed path: <strong>the LLM's semantic drift made visible.</strong></p>
-
+          <!-- <p>Click any document on the map and regenerate. The LLM reruns on that source alone — bypassing the vector search entirely. Each answer is re-embedded after streaming and plotted as a green diamond. Multiple answers per session connect as a dashed path: <strong>the LLM's semantic drift made visible.</strong></p> -->
+          <p>Click any document on the map to regenerate. The LLM reruns on that specific source, <strong>bypassing the noise to prevent hallucinations</strong>. Each answer is re-embedded and plotted as a green diamond. Multiple sessions connect via a dashed path, making the LLM’s semantic drift —- and its <strong>factual reliability</strong> -— instantly visible.</p>
           <div class="screenshot-block">
               <img src="../../assets/img/rag-answers.png" style="width:80%;height:100%;object-fit:cover;border-radius:10px;">
             <div class="screenshot-caption">Four answers from difference source documents — connected by a dashed path showing semantic drift.</div>
@@ -331,7 +333,7 @@
   </div>
 
   <!-- History -->
-  <div class="section">
+  <!-- <div class="section">
     <div class="container">
       <div class="editorial">
         <div class="editorial-label">Session History</div>
@@ -341,7 +343,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 </main>
 
