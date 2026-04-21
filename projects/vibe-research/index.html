@@ -8,6 +8,261 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../../assets/css/style.css" />
+  <style>
+    body { font-size: 15px; }
+
+    .project-hero { padding: 64px 0 48px; border-bottom: 1px solid var(--border); }
+    .back-link { margin-bottom: 40px; }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 16px;
+    }
+    .hero-title {
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero-title em { font-style: normal; color: var(--blue); }
+    .hero-lede {
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--muted);
+      max-width: 560px;
+    }
+    .hero-lede strong { color: var(--text); font-weight: 500; }
+
+    /* Two-column editorial layout */
+    .editorial {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0 48px;
+      align-items: start;
+    }
+    @media (max-width: 680px) {
+      .editorial { grid-template-columns: 1fr; }
+    }
+    .editorial-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      padding-top: 4px;
+      position: sticky;
+      top: 24px;
+    }
+    .editorial-body h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+    .editorial-body p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 600px;
+      margin-bottom: 12px;
+    }
+    .editorial-body p:last-child { margin-bottom: 0; }
+    .editorial-body strong { color: var(--text); font-weight: 500; }
+
+    .section { padding: 52px 0; border-bottom: 1px solid var(--border); }
+    .section:last-child { border-bottom: none; }
+
+    /* Video */
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #0a0d14;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+    .video-placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+      color: #374151;
+    }
+    .video-play {
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 1px solid #1f2937;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; color: #4b5563;
+    }
+
+    /* ── VIBE Canvas mock ────────────────────────────────────────────── */
+    .vibe-mock {
+      margin-top: 24px;
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #080c14;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+    .vibe-mock::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 55% 45% at 50% 50%,
+        rgba(96,165,250,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* POI labels */
+    .poi {
+      position: absolute;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: rgba(15,17,23,0.85);
+      border: 1px solid rgba(96,165,250,0.35);
+      border-radius: 20px;
+      padding: 3px 10px;
+      white-space: nowrap;
+      cursor: grab;
+    }
+    .poi::after {
+      content: '⠿';
+      font-size: 9px;
+      color: rgba(96,165,250,0.4);
+      margin-left: 5px;
+    }
+
+    /* Gravity lines */
+    .vibe-lines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    /* Paper dots */
+    .dot {
+      position: absolute;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+    }
+    .dot.active {
+      box-shadow: 0 0 0 3px rgba(96,165,250,0.25);
+    }
+
+    /* Tooltip */
+    .detail-chip {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(26,31,46,0.95);
+      border: 1px solid rgba(96,165,250,0.3);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 10px;
+      color: var(--muted);
+      white-space: nowrap;
+      max-width: 80%;
+    }
+    .detail-chip span { color: var(--blue); font-weight: 600; }
+
+    /* ── Pipeline ────────────────────────────────────────────────────── */
+    .pipeline {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 20px;
+    }
+    .pipeline-node {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--text);
+      background: var(--bg-card);
+    }
+    .pipeline-node.active {
+      border-color: rgba(96,165,250,0.4);
+      color: var(--blue);
+    }
+    .pipeline-sep { color: var(--border-hover); font-size: 13px; }
+
+    /* ── LLM analysis mock ───────────────────────────────────────────── */
+    .analysis-mock {
+      margin-top: 24px;
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .analysis-header {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .analysis-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+    .analysis-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); }
+    .analysis-query { font-size: 10px; color: var(--muted); margin-left: auto; }
+    .analysis-body { padding: 14px 16px; font-size: 12px; color: var(--muted); line-height: 1.7; }
+    .analysis-body strong { color: var(--text); font-weight: 500; }
+    .analysis-body .tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 1px 7px;
+      border-radius: 10px;
+      border: 1px solid rgba(96,165,250,0.3);
+      color: var(--blue);
+      margin: 0 2px;
+    }
+    .analysis-cursor {
+      display: inline-block;
+      width: 1px;
+      height: 11px;
+      background: var(--blue);
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* ── Feature grid ────────────────────────────────────────────────── */
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+    @media (max-width: 500px) { .feat-grid { grid-template-columns: 1fr; } }
+    .feat-item { border-top: 1px solid var(--border); padding-top: 12px; }
+    .feat-name {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 4px;
+    }
+    .feat-desc { font-size: 12px; color: var(--muted); line-height: 1.55; }
+
+    .site-footer { border-top: 1px solid var(--border); padding: 24px 0; }
+  </style>
 </head>
 <body>
 
@@ -20,29 +275,138 @@
   </div>
 </header>
 
-<main class="container">
-  <div class="coming-soon-page">
-    <div class="coming-soon-inner">
-      <a href="../../" class="back-link" style="justify-content:center;margin-bottom:32px;">
+<main>
+
+  <!-- Hero -->
+  <div class="project-hero">
+    <div class="container">
+      <a href="../../" class="back-link">
         <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
         </svg>
-        Back to Portfolio
+        Back
       </a>
-      <div class="coming-soon-icon">🔬</div>
-      <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:16px;">
-        <h1 class="coming-soon-title" style="margin-bottom:0;">VIBE Research Assistant</h1>
-        <span class="badge badge-amber">Coming Soon</span>
-      </div>
-      <p class="coming-soon-desc">
-        An intelligent research assistant that visualizes relationships between papers, concepts, and evidence — helping researchers navigate complex knowledge spaces.
+      <div class="hero-eyebrow">Personal Research Navigator</div>
+      <h1 class="hero-title">VIBE<br><em>Research Assistant</em></h1>
+      <p class="hero-lede">
+        A personal bibliography mapped into space. POI nodes on the periphery pull papers toward them by semantic similarity — <strong>drag one and the field reorganizes around the new concept.</strong> An LLM reads the resulting map and tells you what it sees.
       </p>
     </div>
   </div>
+
+  <!-- Demo -->
+  <div class="section">
+    <div class="container">
+      <div class="video-wrapper">
+        <!-- <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe> -->
+        <div class="video-placeholder">
+          <div class="video-play">▶</div>
+          <span style="font-size:12px;">Demo video coming soon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Concept -->
+  <div class="section">
+    <div class="container">
+      <div class="editorial">
+        <div class="editorial-label">Concept</div>
+        <div class="editorial-body">
+          <h2>Concept gravity</h2>
+          <p>~1,083 papers from a personal BibTeX library are embedded as points in a 2D field. <strong>POIs (Points of Interest)</strong> — concept terms placed at the periphery — act as attractors: each paper is positioned by how strongly it is pulled toward each surrounding concept. The result is a map of a research field, not a list.</p>
+          <p>A query decomposes into concept terms that become the new POI labels. The field redraws around them. <strong>The layout is the search result.</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POI Canvas -->
+  <div class="section">
+    <div class="container">
+      <div class="editorial">
+        <div class="editorial-label">POI Canvas</div>
+        <div class="editorial-body">
+          <h2>Drag to reframe the question</h2>
+          <p>Moving a POI node repositions every paper relative to the new conceptual anchor — not by re-running a query, but by <strong>changing what counts as central</strong>. Work that was peripheral under one framing becomes dominant under another. The gesture makes explicit that relevance is a choice about what you care about, not a fixed property of a document.</p>
+          <p>With two POIs active the canvas becomes a tension field. Papers in the middle sit at the intersection of both concepts — that is typically where the cross-disciplinary work is. Papers at the edges belong unambiguously to one pole.</p>
+          <div class="screenshot-block">
+            <!-- <div class="screenshot-placeholder"> -->
+              <img src="../../assets/img/vibe-pois.jpg" style="width:80%;height:100%;object-fit:cover;border-radius:10px;">
+            <!-- </div> -->
+            <div class="screenshot-caption">Four POIs arranged at the periphery. Dense clusters = well-converged subfields. Papers drifting toward the center straddle multiple concepts.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Density -->
+  <div class="section">
+    <div class="container">
+      <div class="editorial">
+        <div class="editorial-label">Density</div>
+        <div class="editorial-body">
+          <h2>Where the field has converged</h2>
+          <p>Cluster density is information. A dense region means the field has converged — many papers making closely related arguments. A sparse region means either an underexplored question or one that doesn't yet have enough mass to cohere. The center of the canvas, where no single POI dominates, tends to surface the genuinely cross-cutting work that keyword search consistently buries.</p>
+          <p>Because the layout updates with each query, the density pattern changes with the framing. <strong>The same corpus looks different depending on which concepts you choose to anchor it.</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LLM Analysis -->
+  <div class="section">
+    <div class="container">
+      <div class="editorial">
+        <div class="editorial-label">LLM Analysis</div>
+        <div class="editorial-body">
+          <h2>Reading the map together</h2>
+          <p>The LLM receives the same spatial configuration the user sees — which papers landed near which POIs, which sit at the intersections, which are outliers. Its commentary is grounded in that specific layout, not retrieved from general knowledge. <strong>It is interpreting the map, not answering a search query.</strong></p>
+          <p>Clicking a dot shifts the mode: the LLM reads that paper's abstract in context of its position on the canvas — why it sits where it does, what it shares with its neighbors, where it diverges.</p>
+
+
+          <div class="screenshot-block">
+            <img src="../../assets/img/vibe-chat.jpg" style="width:50%;height:auto;display:block;border-radius:10px;border:1px solid var(--border);">
+            <div class="screenshot-caption" style="margin-top:8px;">LLM narrating the current layout — which clusters dominate, which papers sit at the intersections.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Corpus -->
+  <div class="section">
+    <div class="container">
+      <div class="editorial">
+        <div class="editorial-label">Corpus</div>
+        <div class="editorial-body">
+          <h2>A personal library as the substrate</h2>
+          <p>The corpus is ~1,083 papers from a personal BibTeX library spanning HCI, information retrieval, visualization, machine learning, and NLP. Because it is one researcher's reading history rather than a general-purpose database, the density patterns it produces reflect actual research attention — what got read, what got cited, where the gaps are.</p>
+          <p>Author mode is a distinct entry point: querying by name produces a POI canvas derived from that researcher's own titles, laying out their body of work as a field shaped by their own concepts.</p>
+
+          <div class="screenshot-block">
+            <img src="../../assets/img/vibe-docinfo.jpg" style="width:50%;height:auto;display:block;border-radius:10px;border:1px solid var(--border);">
+            <div class="screenshot-caption" style="margin-top:8px;">Selecting a paper surfaces its metadata and abstract — the LLM uses this to explain its position in the current layout.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </main>
 
 <footer class="site-footer">
-  <div class="container">Jae-wook Ahn</div>
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;">
+    <a href="../../" class="back-link" style="margin-bottom:0;">
+      <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+      Back to Portfolio
+    </a>
+    <span style="font-size:12px;color:var(--muted);">Jae-wook Ahn</span>
+  </div>
 </footer>
 
 </body>
